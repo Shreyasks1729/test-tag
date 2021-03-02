@@ -1,0 +1,47 @@
+---
+platform: linux
+
+jobs:
+- name: deploy-redis
+  plan:
+  - get: pipeline-code
+  - put: redis
+    params:
+      chart: bitnami/redis
+      version: {{redis_chart_version}}
+      values: pipeline-code/discourse_/overrides/prod/redis.yaml
+      wait_until_ready: 360
+      # override_values:
+      # - key: image.tag
+      #   path: {{redis_tag}}
+      #   type: string
+      # - key: sentinel.image.tag
+      #   path: {{redis_sentinel_tag}}
+      #   type: string
+
+resources:
+- name: redis
+  type: helm
+  source:
+    release: redis
+    cluster_ca: {{cluster_ca}}
+    cluster_url: {{cluster_url}}
+    token: {{token}}
+    namespace: ((namespace))
+    repos:
+    - name: bitnami
+      url: https://charts.bitnami.com/bitnami
+
+- name: pipeline-code
+  type: git
+  source:
+    uri: git@github.com:eHealthAfrica/concourse-pipelines.git
+    branch: {{branch}}
+    private_key: {{git_private_key}}
+
+resource_types:
+- name: helm
+  type: docker-image
+  source:
+    repository: typositoire/concourse-helm3-resource
+    tag: {{helm_tag3}}

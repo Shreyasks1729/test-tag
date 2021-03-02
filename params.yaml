@@ -1,0 +1,11 @@
+branch: discourse
+discourse_version: 2.3.1
+
+cluster_ca: ((kubernetes_ca))
+ 
+# secrets
+token: ((kubernetes_token))
+git_private_key: ((git_private_key))
+cluster_url: ((kubernetes_cluster_url))
+
+
