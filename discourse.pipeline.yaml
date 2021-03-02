@@ -29,20 +29,20 @@ resources:
       url: https://charts.bitnami.com/bitnami
 
 
+- name: pipeline-code
+  type: git
+  source:
+    uri: git@github.com:Shreyasks1729/test-tag.git
+    branch: main
+    private_key: {{git_private_key}}
+    tag_filter: v*
+
 # - name: pipeline-code
 #   type: git-tag
 #   source:
 #     uri: git@github.com:Shreyasks1729/test-tag.git
-#     branch: main
+#     tag_filter: v*
 #     private_key: {{git_private_key}}
-#     tag_filter: "*1.0.0*"
-
-- name: pipeline-code
-  type: git-tag
-  source:
-    uri: git@github.com:Shreyasks1729/test-tag.git
-    tag_filter: v*
-    private_key: {{git_private_key}}
 
 resource_types:
 - name: helm
