@@ -35,7 +35,7 @@ resources:
     uri: git@github.com:Shreyasks1729/test-tag.git
     branch: main
     private_key: {{git_private_key}}
-    tag_filter: v*
+    tag_filter: "v1.8.5*"
 
 # - name: pipeline-code
 #   type: git-tag
