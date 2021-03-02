@@ -33,7 +33,8 @@ resources:
     uri: git@github.com:Shreyasks1729/test-tag.git
     branch: main
     private_key: {{git_private_key}}
-
+    tag_filter: "*1.0.0*"
+      
 resource_types:
 - name: helm
   type: docker-image
